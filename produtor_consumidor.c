@@ -26,14 +26,14 @@ pthread_mutex_t mutex;
 pthread_cond_t condFull;
 pthread_cond_t condEmpty;
 
-int sleepInProducer = -1; // Variável global para indicar se deve haver sleep no produtor (1) ou no consumidor (0) e -1 para nenhum deles
+int sleepInProducer = 1; // Variável global para indicar se deve haver sleep no produtor (1) ou no consumidor (0) e -1 para nenhum deles
 
 typedef struct {
     int id;
 } ThreadArgs;
 
 void executeTask(Clock *clock, int id) {
-    printf("ID_produtor: %d, Process: %d, Clock: (%d, %d, %d)\n",clock->producer_id, id, clock->p[0], clock->p[1], clock->p[2]);
+    printf("ID_produtor: %d, Clock: (%d, %d, %d)\n",clock->producer_id, clock->p[0], clock->p[1], clock->p[2]);
 }
 
 Clock getTask() {
@@ -41,7 +41,7 @@ Clock getTask() {
 
     while (taskCount == 0) {
         pthread_cond_wait(&condEmpty, &mutex);
-        printf("Fila esta vazia\n\n");
+        printf("Fila esta vazia\n");
     }
 
     Clock task = taskQueue[0];
