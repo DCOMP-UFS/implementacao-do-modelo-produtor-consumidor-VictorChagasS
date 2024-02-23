@@ -26,7 +26,7 @@ pthread_mutex_t mutex;
 pthread_cond_t condFull;
 pthread_cond_t condEmpty;
 
-int sleepInProducer = 1; // Variável global para indicar se deve haver sleep no produtor (1) ou no consumidor (0) e -1 para nenhum deles
+int sleepInProducer = -1; // Variável global para indicar se deve haver sleep no produtor (1) ou no consumidor (0) e -1 para nenhum deles
 
 typedef struct {
     int id;
