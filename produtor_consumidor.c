@@ -8,6 +8,8 @@
 #define THREAD_NUM 3    // Tamanho do pool de threads
 #define BUFFER_SIZE 90 // Número máximo de tarefas enfileiradas
 
+
+
 typedef struct Clock { 
     int p[3];
     int producer_id;
@@ -26,8 +28,12 @@ pthread_mutex_t mutex;
 pthread_cond_t condFull;
 pthread_cond_t condEmpty;
 
+//PARA MUDANÇA DE CENARIOS ENTRE PRODUTOR E CONSUMIDOR, MODIFIQUE ESTA VARIAVEL
+//
+//
 int sleepInProducer = -1; // Variável global para indicar se deve haver sleep no produtor (1) ou no consumidor (0) e -1 para nenhum deles
-
+//
+//
 typedef struct {
     int id;
 } ThreadArgs;
