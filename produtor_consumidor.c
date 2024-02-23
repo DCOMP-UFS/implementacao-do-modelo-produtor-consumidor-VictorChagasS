@@ -6,7 +6,7 @@
 #include <time.h>
 
 #define THREAD_NUM 3    // Tamanho do pool de threads
-#define BUFFER_SIZE 90 // Número máximo de tarefas enfileiradas
+#define BUFFER_SIZE 10 // Número máximo de tarefas enfileiradas
 
 
 
@@ -46,8 +46,9 @@ Clock getTask() {
     pthread_mutex_lock(&mutex);
 
     while (taskCount == 0) {
-        pthread_cond_wait(&condEmpty, &mutex);
         printf("Fila esta vazia\n");
+        pthread_cond_wait(&condEmpty, &mutex);
+      
     }
 
     Clock task = taskQueue[0];
@@ -68,8 +69,9 @@ void submitTask(Clock task) {
     pthread_mutex_lock(&mutex);
 
     while (taskCount == BUFFER_SIZE) {
+        printf("Fila esta cheia\n");
         pthread_cond_wait(&condFull, &mutex);
-          printf("Fila esta cheia\n");
+      
     }
 
     taskQueue[taskCount] = task;
